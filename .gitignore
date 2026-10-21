@@ -1,0 +1,12 @@
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.env
+data/tether.db*
+data/keys/
+data/models/
+data/audit_anchor.json
+frontend/test-results/
+frontend/playwright-report/

@@ -1,0 +1,15 @@
+# UNVERIFIED: Docker Desktop was not running in the build environment. See README "Docker".
+services:
+  backend:
+    build: { context: ., dockerfile: backend/Dockerfile }
+    environment:
+      TETHER_DEMO_PASSWORD: ${TETHER_DEMO_PASSWORD:-tether-demo}
+      TETHER_CORS_ORIGINS: http://localhost:8080
+    volumes: [ "tether-data:/app/data" ]
+    ports: [ "8000:8000" ]
+  frontend:
+    build: { context: ., dockerfile: frontend/Dockerfile }
+    depends_on: [ backend ]
+    ports: [ "8080:8080" ]
+volumes:
+  tether-data: {}
