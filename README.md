@@ -4,7 +4,7 @@
 
 TETHER binds each AI agent to a signed Role Contract and is designed to score every tool call against it, then contain drift with a five-level Trust Ladder (D3COY 2026, Round 0).
 
-> **Build status: incomplete.** Four writes were stopped by a safety classifier during the build ([docs/BLOCKERS.md](docs/BLOCKERS.md)). The **Trust Ladder policy engine is not implemented**, so the gateway **fails closed**: every tool call is denied (HTTP 503) and audited. The **Behavior Engine is a disabled stub** (s_b = 0). The seven demo scenarios and the full benchmark are not implemented. See the [traceability matrix](docs/requirements-traceability.md) for per-requirement status.
+> **Build status: incomplete.** Four writes were stopped by a safety classifier during the build ([docs/BLOCKERS.md](docs/BLOCKERS.md)). The **Trust Ladder policy engine is not implemented**, so the gateway **fails closed**: every tool call is denied (HTTP 503) and audited. The **Behavior Engine is a disabled stub** (s_b = 0). The seven demo scenarios and the full benchmark are not implemented. See the [traceability matrix](docs/requirements-traceability.md) for per-requirement status, and the [completion and deployment guide](docs/COMPLETION_GUIDE.md) for the remaining steps.
 
 ## What works (tested)
 * **Signed Role Contracts**: JSON/YAML, schema validation, Ed25519 owner + security signatures, tamper detection, export, version diff.
