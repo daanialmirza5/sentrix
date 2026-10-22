@@ -1,6 +1,7 @@
 """FastAPI application factory."""
 from __future__ import annotations
 
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request
@@ -18,6 +19,10 @@ async def lifespan(_app: FastAPI):
     from .engines.deception import seed_honey
     with db_session() as db:
         seed_honey(db)
+    if os.environ.get("TETHER_AUTO_SEED", "").lower() in {"1", "true", "yes"}:
+        from .demo_seed import seed_if_empty
+        with db_session() as db:
+            seed_if_empty(db)
     yield
 
 
