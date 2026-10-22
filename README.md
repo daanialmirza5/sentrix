@@ -58,7 +58,12 @@ Results from the final run are in [reports/test-results.md](reports/test-results
 | GNU make users | `make install`, `make test`, `make e2e`, … (see `Makefile`) |
 
 ## Docker
-`docker-compose.yml` and the Dockerfiles are written but **unverified**: Docker Desktop wasn't running in the build environment.
+The root `Dockerfile` builds a single container (API + console + MiniLM model) and is **verified**: built and smoke-tested locally (health, seeded fleet, UI deep links, real MiniLM analysis, audit chain). It listens on `$PORT` and seeds the demo fleet on first start (`TETHER_AUTO_SEED=1`).
+```powershell
+docker build -t tether .
+docker run -p 8000:8000 tether        # http://127.0.0.1:8000
+```
+`railway.json` deploys the same image to Railway (`railway up`). The older two-service `docker-compose.yml` is still unverified.
 
 ## Measured results
 * **Drift (synthetic, held-out seeds, calibrated h = 10):** frozen anchor detects 100 % with a median 13-window delay; the rolling baseline also detects, with a median 17.5. The benign false-alarm rate is **6.7 %**. Full table: [reports/drift_eval.md](reports/drift_eval.md).
