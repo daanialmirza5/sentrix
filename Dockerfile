@@ -17,7 +17,8 @@ RUN python scripts/download_model.py
 COPY backend/app backend/app
 COPY reports/drift_eval.json reports/drift_eval.json
 COPY --from=ui /ui/dist frontend/dist
-RUN useradd --create-home --uid 10001 tether && chown -R tether /app
+# uid 1000: Hugging Face Spaces runs containers as uid 1000; harmless on other hosts.
+RUN useradd --create-home --uid 1000 tether && chown -R tether /app
 USER tether
 WORKDIR /app/backend
 EXPOSE 8000
