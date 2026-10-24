@@ -1,5 +1,7 @@
 # TETHER
 
+**Live demo:** https://tether-production-81af.up.railway.app (sign in as `priya` / `tether-demo`)
+
 **Valid token ≠ valid behavior.** IAM asks "is this identity allowed to do this?" TETHER asks "is this still you?"
 
 TETHER binds each AI agent to a signed Role Contract and is designed to score every tool call against it, then contain drift with a five-level Trust Ladder (D3COY 2026, Round 0).
