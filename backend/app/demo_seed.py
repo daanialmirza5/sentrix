@@ -1,5 +1,5 @@
 """Synthetic demo fleet (PRD personas and agents). Used by scripts/seed_demo.py and, when
-TETHER_AUTO_SEED=1, on startup of an empty database (cloud deployments have no seed step)."""
+SENTRIX_AUTO_SEED=1, on startup of an empty database (cloud deployments have no seed step)."""
 from __future__ import annotations
 
 import secrets

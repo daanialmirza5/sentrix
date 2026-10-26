@@ -5,5 +5,5 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path $PSScriptRoot -Parent
 Push-Location (Join-Path $root "frontend"); npx vite build; Pop-Location
 Set-Location (Join-Path $root "backend")
-Write-Host "TETHER console + API on http://$($BindHost):$Port  (API docs: /docs)"
+Write-Host "SENTRIX console + API on http://$($BindHost):$Port  (API docs: /docs)"
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --host $BindHost --port $Port

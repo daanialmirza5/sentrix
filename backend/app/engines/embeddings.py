@@ -51,7 +51,7 @@ class Embedder:
                 return
             t0 = time.perf_counter()
             if not settings.embeddings_enabled:
-                self.mode, self.error = "lexical-fallback", "disabled by TETHER_EMBEDDINGS=0"
+                self.mode, self.error = "lexical-fallback", "disabled by SENTRIX_EMBEDDINGS=0"
                 return
             try:
                 import onnxruntime as ort

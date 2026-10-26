@@ -3,7 +3,7 @@
 ## Trust boundaries
 1. **Agent ↔ gateway.** Agents hold only task-bound EdDSA tokens, never raw tool credentials. Tokens bind agent, task, session, scope and contract version, and their TTL is clamped to 5–15 min.
 2. **Operator ↔ API.** Operator JWT with role checks (viewer / owner / security / admin), signed with a secret separate from the broker key.
-3. **TETHER ↔ storage.** SQLite plus a hash-chained audit log; the chain head is anchored to a separate file.
+3. **SENTRIX ↔ storage.** SQLite plus a hash-chained audit log; the chain head is anchored to a separate file.
 4. **Simulation ↔ host.** The synthetic VFS and MockSink have no real file or network access.
 
 ## Threats and controls (TRD §7) and their status in this build

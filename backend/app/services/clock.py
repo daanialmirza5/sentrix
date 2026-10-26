@@ -7,7 +7,7 @@ from __future__ import annotations
 import contextvars
 import time
 
-_virtual: contextvars.ContextVar[float | None] = contextvars.ContextVar("tether_virtual_time", default=None)
+_virtual: contextvars.ContextVar[float | None] = contextvars.ContextVar("sentrix_virtual_time", default=None)
 
 
 def now() -> float:

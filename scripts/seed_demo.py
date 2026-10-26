@@ -11,8 +11,8 @@ import sys
 
 import httpx
 
-BASE = os.environ.get("TETHER_API", "http://127.0.0.1:8000")
-PW = os.environ.get("TETHER_DEMO_PASSWORD", "tether-demo")
+BASE = os.environ.get("SENTRIX_API", "http://127.0.0.1:8000")
+PW = os.environ.get("SENTRIX_DEMO_PASSWORD", "sentrix-demo")
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "backend"))
 from app.contracts.schema import procurement_example  # noqa: E402
 

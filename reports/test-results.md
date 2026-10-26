@@ -12,7 +12,7 @@
 | Audit chain (demo DB) | `backend\.venv\Scripts\python.exe scripts\verify_audit.py` | valid (re-verified after the final clean reseed) |
 | Drift benchmark | `backend\.venv\Scripts\python.exe scripts\eval_drift.py` | see [drift_eval.md](drift_eval.md) |
 
-The one remaining pytest warning is a third-party deprecation notice from Starlette's TestClient about its httpx dependency. It does not come from TETHER code.
+The one remaining pytest warning is a third-party deprecation notice from Starlette's TestClient about its httpx dependency. It does not come from SENTRIX code.
 
 ## Defects found and fixed (not hidden)
 1. **Drift false alarms on benign traffic.** In-sample anchor statistics were the cause. Fixed with leave-one-out calibration and 20 enrollment windows. The held-out benign false-alarm rate is still 6.7 % at the calibrated h.

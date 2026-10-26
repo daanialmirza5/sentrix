@@ -23,4 +23,4 @@ def test_static_assets_and_no_traversal(client):
     asset = next((DIST / "assets").glob("*.js"))
     assert client.get(f"/assets/{asset.name}").status_code == 200
     r = client.get("/..%2F..%2Fbackend%2Fapp%2Fconfig.py")
-    assert "TETHER_DATA_DIR" not in r.text  # falls back to index.html, never serves files outside dist
+    assert "SENTRIX_DATA_DIR" not in r.text  # falls back to index.html, never serves files outside dist

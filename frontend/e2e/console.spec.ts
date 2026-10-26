@@ -2,8 +2,8 @@
 // Prereqs: backend running, scripts/seed_demo.py executed (creates a pending change request for proc-agent-07).
 import { expect, test, type APIRequestContext, type Page } from "@playwright/test";
 
-const PW = process.env.TETHER_DEMO_PASSWORD ?? "tether-demo";
-const API = process.env.TETHER_API ?? "http://127.0.0.1:8000";
+const PW = process.env.SENTRIX_DEMO_PASSWORD ?? "sentrix-demo";
+const API = process.env.SENTRIX_API ?? "http://127.0.0.1:8000";
 const SHOT = (name: string) => `../screenshots/${name}.png`;
 
 // The backend rate-limits logins (20/min). The suite therefore signs in through the UI once per persona
@@ -32,7 +32,7 @@ async function uiLogin(page: Page, user: string) {
 async function login(page: Page, user: string) {
   const tok = await apiToken(page.request, user);
   await page.goto("/");
-  await page.evaluate((t) => sessionStorage.setItem("tether.token", t), tok);
+  await page.evaluate((t) => sessionStorage.setItem("sentrix.token", t), tok);
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Overview" })).toBeVisible();
 }
@@ -56,7 +56,7 @@ test.beforeAll(async ({ request }) => {
 
 test("login screen", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("TETHER Console")).toBeVisible();
+  await expect(page.getByText("SENTRIX Console")).toBeVisible();
   await expect(page.getByTestId("login-backdrop").locator("canvas")).toBeVisible(); // lazy 3D chunk loaded
   await page.waitForTimeout(1200);
   await page.screenshot({ path: SHOT("01-login") });

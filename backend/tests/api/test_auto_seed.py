@@ -1,4 +1,4 @@
-"""TETHER_AUTO_SEED: an empty cloud instance comes up with the signed demo fleet; restarts do not duplicate it."""
+"""SENTRIX_AUTO_SEED: an empty cloud instance comes up with the signed demo fleet; restarts do not duplicate it."""
 from app.audit import chain
 from app.contracts import registry
 from app.demo_seed import FLEET, seed_if_empty
@@ -17,10 +17,10 @@ def test_seed_creates_signed_fleet_once(db):
 
 
 def test_auto_seed_on_startup(monkeypatch):
-    monkeypatch.setenv("TETHER_AUTO_SEED", "1")
+    monkeypatch.setenv("SENTRIX_AUTO_SEED", "1")
     from fastapi.testclient import TestClient
     from app.main import create_app
     with TestClient(create_app()) as c:
-        tok = c.post("/v1/auth/login", json={"username": "auditor", "password": "tether-demo"}).json()["token"]
+        tok = c.post("/v1/auth/login", json={"username": "auditor", "password": "sentrix-demo"}).json()["token"]
         agents = c.get("/v1/agents", headers={"Authorization": f"Bearer {tok}"}).json()
     assert {a["id"] for a in agents} == {f[0] for f in FLEET}

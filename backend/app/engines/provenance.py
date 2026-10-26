@@ -5,7 +5,7 @@
 * s_P = max over active windows of tau * o(a); o(a) = 1 for out-of-contract actions,
   0.4 * s_R for in-contract ones.
 * Span attribution ranks the lines of the untrusted content by an instruction-pattern score
-  (including inert TETHER test markers) and cosine similarity to the action text.
+  (including inert SENTRIX test markers) and cosine similarity to the action text.
 * Privacy: raw spans are kept until retain_until, then purged unless flagged as a cause.
 """
 from __future__ import annotations
@@ -98,7 +98,7 @@ def score(db: Session, *, session_id: str, step: int, out_of_contract: bool, s_r
 
 def _instruction_score(text: str) -> tuple[float, list[str]]:
     if INJECTION_MARKER_RE.search(text):
-        return 1.0, ["tether-test-injection-marker"]
+        return 1.0, ["sentrix-test-injection-marker"]
     hits = [p for p in INSTRUCTION_PATTERNS if re.search(p, text, re.I)]
     return min(1.0, 0.35 * len(hits)), hits
 

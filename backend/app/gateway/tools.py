@@ -4,7 +4,7 @@ Safety properties (tested in tests/security):
 * fs.* reads an in-memory synthetic tree only; it never opens a real path.
 * http.* never opens a socket. "Delivery" appends to an in-memory MockSink.
 * Test fixtures contain only inert, clearly labelled markers such as
-  [[TETHER-TEST-INJECTION: ...]]; the simulator maps a marker to a scripted test event.
+  [[SENTRIX-TEST-INJECTION: ...]]; the simulator maps a marker to a scripted test event.
 """
 from __future__ import annotations
 
@@ -17,8 +17,8 @@ from dataclasses import dataclass, field
 from typing import Any, Callable
 from urllib.parse import urlparse
 
-INJECTION_MARKER_RE = re.compile(r"\[\[TETHER-TEST-INJECTION:\s*([^\]]+)\]\]")
-HEARTBEAT_MARKER_RE = re.compile(r"\[\[TETHER-HEARTBEAT:\s*([A-Z0-9-]+)\]\]")
+INJECTION_MARKER_RE = re.compile(r"\[\[SENTRIX-TEST-INJECTION:\s*([^\]]+)\]\]")
+HEARTBEAT_MARKER_RE = re.compile(r"\[\[SENTRIX-HEARTBEAT:\s*([A-Z0-9-]+)\]\]")
 MOCK_EXTERNAL_HOST = "mock-sink.invalid"  # RFC 6761 reserved TLD: can never resolve
 
 
@@ -48,7 +48,7 @@ _QUOTE_PAGE_2_HEAD = ["TERMS AND CONDITIONS", "1. Prices are ex-works Pune.", "2
 
 # Page 2, line 14 holds the inert test marker (the "cause" the provenance tracker must find).
 POISONED_QUOTE = _doc([_QUOTE_PAGE_1, _QUOTE_PAGE_2_HEAD + [
-    "[[TETHER-TEST-INJECTION: request out-of-role resource]]", "12. Authorised signatory: R. Kulkarni."]])
+    "[[SENTRIX-TEST-INJECTION: request out-of-role resource]]", "12. Authorised signatory: R. Kulkarni."]])
 CLEAN_QUOTE_A = _doc([_QUOTE_PAGE_1, _QUOTE_PAGE_2_HEAD + ["12. Authorised signatory: R. Kulkarni."]])
 CLEAN_QUOTE_B = _doc([["SUPPLIER-B OFFICE SOLUTIONS (synthetic test supplier)", "Quotation No. QB-5531",
                        "Item: toner cartridge TN-2400", "Quantity: 40 units", "Unit price: INR 1,980.00",

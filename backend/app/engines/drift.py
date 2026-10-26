@@ -2,7 +2,7 @@
 
 * Enrollment: the first `drift_enroll_windows` clean windows after registration (or after an
   approved change's probation) define mu_0, sigma_0. The anchor is then frozen and signed by the
-  tether-system identity. Observed traffic never moves it; only approved changes do (ADR-005).
+  sentrix-system identity. Observed traffic never moves it; only approved changes do (ADR-005).
 * Per window: d_t = RMS of z-scores against the anchor; x_t = (d_t - d_mean0) / d_std0.
 * CUSUM: S_t = max(0, S_{t-1} + x_t - k), alarm when S_t > h (k=0.5, h=5 by default).
 * A rolling EWMA baseline runs alongside the frozen anchor for comparison only.
@@ -69,7 +69,7 @@ def _freeze(st: DriftState, tools: list[str], contract_version: int) -> None:
     anchor = {"tools": tools, "mu": mu.round(5).tolist(), "sigma": sigma.round(5).tolist(),
               "d_mean": round(float(d.mean()), 5), "d_std": round(max(float(d.std()), 0.25), 5),
               "windows": len(arr), "contract_version": contract_version, "captured_at": utcnow().isoformat()}
-    anchor["signature"] = keys.sign("tether-system", "anchor", {k: v for k, v in anchor.items() if k != "signature"})
+    anchor["signature"] = keys.sign("sentrix-system", "anchor", {k: v for k, v in anchor.items() if k != "signature"})
     st.anchor = anchor
     st.status = "frozen"
     st.rolling_mu = anchor["mu"]
