@@ -94,7 +94,7 @@ export function Toaster() {
 }
 
 export function useTitle(title: string) {
-  useEffect(() => { document.title = `${title} · TETHER`; }, [title]);
+  useEffect(() => { document.title = `${title} · SENTRIX`; }, [title]);
 }
 
 export function ErrorBox({ message }: { message: string }) {

@@ -1,8 +1,8 @@
-// Thin typed client over the TETHER REST API. The operator token lives in memory + sessionStorage.
+// Thin typed client over the SENTRIX REST API. The operator token lives in memory + sessionStorage.
 export type User = { username: string; display: string; roles: string[] };
 
 let token: string | null = null;
-try { token = sessionStorage.getItem("tether.token"); } catch { token = null; }
+try { token = sessionStorage.getItem("sentrix.token"); } catch { token = null; }
 
 export const hasToken = () => !!token;
 
@@ -12,7 +12,7 @@ export class ApiError extends Error {
 
 export function setToken(t: string | null) {
   token = t;
-  try { if (t) sessionStorage.setItem("tether.token", t); else sessionStorage.removeItem("tether.token"); } catch { /* storage unavailable */ }
+  try { if (t) sessionStorage.setItem("sentrix.token", t); else sessionStorage.removeItem("sentrix.token"); } catch { /* storage unavailable */ }
 }
 
 export async function api<T = unknown>(path: string, init: RequestInit = {}): Promise<T> {

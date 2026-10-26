@@ -1,4 +1,4 @@
-"""Environment-driven configuration for TETHER.
+"""Environment-driven configuration for SENTRIX.
 
 All tunables that the TRD names (weights, thresholds, TTLs) live here so they can be
 overridden per deployment without code changes. Values default to the TRD numbers.
@@ -34,46 +34,46 @@ def _env_bool(name: str, default: bool) -> bool:
 
 @dataclass
 class Settings:
-    env: str = field(default_factory=lambda: _env("TETHER_ENV", "development"))
-    data_dir: Path = field(default_factory=lambda: Path(_env("TETHER_DATA_DIR", str(REPO_DIR / "data"))))
-    database_url: str = field(default_factory=lambda: _env("TETHER_DATABASE_URL", ""))
-    redis_url: str = field(default_factory=lambda: _env("TETHER_REDIS_URL", ""))
+    env: str = field(default_factory=lambda: _env("SENTRIX_ENV", "development"))
+    data_dir: Path = field(default_factory=lambda: Path(_env("SENTRIX_DATA_DIR", str(REPO_DIR / "data"))))
+    database_url: str = field(default_factory=lambda: _env("SENTRIX_DATABASE_URL", ""))
+    redis_url: str = field(default_factory=lambda: _env("SENTRIX_REDIS_URL", ""))
     cors_origins: list[str] = field(
         default_factory=lambda: [o.strip() for o in _env(
-            "TETHER_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080").split(",") if o.strip()]
+            "SENTRIX_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:8080").split(",") if o.strip()]
     )
-    max_request_bytes: int = field(default_factory=lambda: _env_int("TETHER_MAX_REQUEST_BYTES", 2 * 1024 * 1024))
+    max_request_bytes: int = field(default_factory=lambda: _env_int("SENTRIX_MAX_REQUEST_BYTES", 2 * 1024 * 1024))
 
     # Operator auth (dashboard users). Separate secret from agent credentials.
-    operator_jwt_secret: str = field(default_factory=lambda: _env("TETHER_OPERATOR_JWT_SECRET", ""))
-    demo_password: str = field(default_factory=lambda: _env("TETHER_DEMO_PASSWORD", "tether-demo"))
-    operator_session_minutes: int = field(default_factory=lambda: _env_int("TETHER_OPERATOR_SESSION_MINUTES", 480))
+    operator_jwt_secret: str = field(default_factory=lambda: _env("SENTRIX_OPERATOR_JWT_SECRET", ""))
+    demo_password: str = field(default_factory=lambda: _env("SENTRIX_DEMO_PASSWORD", "sentrix-demo"))
+    operator_session_minutes: int = field(default_factory=lambda: _env_int("SENTRIX_OPERATOR_SESSION_MINUTES", 480))
 
     # Task-bound credentials (TRD 2: TTL 5-15 min)
-    token_ttl_seconds: int = field(default_factory=lambda: _env_int("TETHER_TOKEN_TTL_SECONDS", 600))
+    token_ttl_seconds: int = field(default_factory=lambda: _env_int("SENTRIX_TOKEN_TTL_SECONDS", 600))
     token_ttl_min_seconds: int = 300
     token_ttl_max_seconds: int = 900
-    restricted_ttl_seconds: int = field(default_factory=lambda: _env_int("TETHER_RESTRICTED_TTL_SECONDS", 300))
-    max_delegation_depth: int = field(default_factory=lambda: _env_int("TETHER_MAX_DELEGATION_DEPTH", 3))
+    restricted_ttl_seconds: int = field(default_factory=lambda: _env_int("SENTRIX_RESTRICTED_TTL_SECONDS", 300))
+    max_delegation_depth: int = field(default_factory=lambda: _env_int("SENTRIX_MAX_DELEGATION_DEPTH", 3))
     delegation_ttl_factor: float = 0.8  # child TTL <= parent remaining * factor
 
     # Role-fit (TRD 4.1)
-    f_lo: float = field(default_factory=lambda: _env_float("TETHER_FIT_LO", 0.15))
-    f_hi: float = field(default_factory=lambda: _env_float("TETHER_FIT_HI", 0.55))
-    embedding_model: str = field(default_factory=lambda: _env("TETHER_EMBEDDING_MODEL", "all-MiniLM-L6-v2"))
-    embeddings_enabled: bool = field(default_factory=lambda: _env_bool("TETHER_EMBEDDINGS", True))
+    f_lo: float = field(default_factory=lambda: _env_float("SENTRIX_FIT_LO", 0.15))
+    f_hi: float = field(default_factory=lambda: _env_float("SENTRIX_FIT_HI", 0.55))
+    embedding_model: str = field(default_factory=lambda: _env("SENTRIX_EMBEDDING_MODEL", "all-MiniLM-L6-v2"))
+    embeddings_enabled: bool = field(default_factory=lambda: _env_bool("SENTRIX_EMBEDDINGS", True))
 
     # Behavior (TRD 4.2) - NOT IMPLEMENTED in this build (docs/BLOCKERS.md #2). The stub returns 0.
     behavior_engine_enabled: bool = field(default_factory=lambda: _env_bool("BEHAVIOR_ENGINE_ENABLED", False))
 
     # Provenance (TRD 4.3)
-    taint_n_half: float = field(default_factory=lambda: _env_float("TETHER_TAINT_N_HALF", 5.0))
+    taint_n_half: float = field(default_factory=lambda: _env_float("SENTRIX_TAINT_N_HALF", 5.0))
     taint_floor: float = 0.05
-    content_retention_hours: int = field(default_factory=lambda: _env_int("TETHER_CONTENT_RETENTION_HOURS", 24))
+    content_retention_hours: int = field(default_factory=lambda: _env_int("SENTRIX_CONTENT_RETENTION_HOURS", 24))
 
     # Drift (TRD 4.4)
-    cusum_k: float = field(default_factory=lambda: _env_float("TETHER_CUSUM_K", 0.5))
-    cusum_h: float = field(default_factory=lambda: _env_float("TETHER_CUSUM_H", 5.0))
+    cusum_k: float = field(default_factory=lambda: _env_float("SENTRIX_CUSUM_K", 0.5))
+    cusum_h: float = field(default_factory=lambda: _env_float("SENTRIX_CUSUM_H", 5.0))
     drift_window: int = 10
     drift_enroll_windows: int = 20  # 12 gave unstable anchors in tests (see docs/decisions.md ADR-005)
     rolling_alpha: float = 0.15
@@ -91,10 +91,10 @@ class Settings:
     l2_clean_windows: int = 5
     contagion_lambda: float = 0.5
     contagion_cooldown_seconds: int = 900
-    probation_actions: int = field(default_factory=lambda: _env_int("TETHER_PROBATION_ACTIONS", 40))
+    probation_actions: int = field(default_factory=lambda: _env_int("SENTRIX_PROBATION_ACTIONS", 40))
 
     # Async / bus
-    async_mode: str = field(default_factory=lambda: _env("TETHER_ASYNC_MODE", "thread"))  # thread | inline
+    async_mode: str = field(default_factory=lambda: _env("SENTRIX_ASYNC_MODE", "thread"))  # thread | inline
     bus_max_queue: int = 10000
 
     # Feature flags for ablation (benchmark only flips these on an isolated instance)
@@ -106,7 +106,7 @@ class Settings:
     def __post_init__(self) -> None:
         self.data_dir = Path(self.data_dir)
         if not self.database_url:
-            self.database_url = f"sqlite:///{(self.data_dir / 'tether.db').as_posix()}"
+            self.database_url = f"sqlite:///{(self.data_dir / 'sentrix.db').as_posix()}"
 
     @property
     def keys_dir(self) -> Path:

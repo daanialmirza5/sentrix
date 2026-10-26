@@ -1,6 +1,6 @@
 """Operator (dashboard) authentication and role-based authorization.
 
-Demo principals model the PRD personas. Passwords come from TETHER_DEMO_PASSWORD;
+Demo principals model the PRD personas. Passwords come from SENTRIX_DEMO_PASSWORD;
 this is demo authentication, not an enterprise IdP (documented in docs/security.md).
 """
 from __future__ import annotations
@@ -30,10 +30,10 @@ USERS: dict[str, Principal] = {
     "priya": Principal("priya", "Priya (SOC analyst, security approver)", frozenset({"viewer", "security"}), "priya"),
     "meera": Principal("meera", "Meera (agent owner)", frozenset({"viewer", "owner"}), "meera"),
     "arjun": Principal("arjun", "Arjun (platform engineer)", frozenset({"viewer", "owner", "admin"}), "arjun"),
-    "auditor": Principal("auditor", "Compliance auditor (read-only)", frozenset({"viewer"}), "tether-system"),
+    "auditor": Principal("auditor", "Compliance auditor (read-only)", frozenset({"viewer"}), "sentrix-system"),
 }
 
-SYSTEM = Principal("tether-system", "TETHER system", frozenset({"viewer", "admin", "security", "owner"}), "tether-system")
+SYSTEM = Principal("sentrix-system", "SENTRIX system", frozenset({"viewer", "admin", "security", "owner"}), "sentrix-system")
 
 
 def _secret() -> str:

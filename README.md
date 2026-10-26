@@ -1,10 +1,10 @@
-# TETHER
+# SENTRIX
 
-**Live demo:** https://tether-production-81af.up.railway.app (sign in as `priya` / `tether-demo`)
+**Live demo:** https://sentrix-production.up.railway.app (sign in as `priya` / `sentrix-demo`)
 
-**Valid token ≠ valid behavior.** IAM asks "is this identity allowed to do this?" TETHER asks "is this still you?"
+**Valid token ≠ valid behavior.** IAM asks "is this identity allowed to do this?" SENTRIX asks "is this still you?"
 
-TETHER binds each AI agent to a signed Role Contract and is designed to score every tool call against it, then contain drift with a five-level Trust Ladder (D3COY 2026, Round 0).
+SENTRIX binds each AI agent to a signed Role Contract and is designed to score every tool call against it, then contain drift with a five-level Trust Ladder (D3COY 2026, Round 0).
 
 > **Build status: incomplete.** Four writes were stopped by a safety classifier during the build ([docs/BLOCKERS.md](docs/BLOCKERS.md)). The **Trust Ladder policy engine is not implemented**, so the gateway **fails closed**: every tool call is denied (HTTP 503) and audited. The **Behavior Engine is a disabled stub** (s_b = 0). The seven demo scenarios and the full benchmark are not implemented. See the [traceability matrix](docs/requirements-traceability.md) for per-requirement status, and the [completion and deployment guide](docs/COMPLETION_GUIDE.md) for the remaining steps.
 
@@ -15,7 +15,7 @@ TETHER binds each AI agent to a signed Role Contract and is designed to score ev
 * **Task-bound credentials**: EdDSA JWTs, scope = contract ∩ task (∩ parent), expiry, revocation with descendant cascade, contract-version binding.
 * **Hash-chained audit log**: detects modification, deletion, and full rewrite (via the anchored head).
 * **Engines, unit-tested in isolation**: role-fit (rules + MiniLM via ONNX; a semantic score cannot override a deny), provenance taint and span attribution, deception (honey-resources, per-agent canaries, DLP), frozen-anchor CUSUM drift, heartbeat ISI, noisy-OR fusion.
-* **Console** (React 18, TypeScript, Vite 8, Tailwind 4, three.js): a 3D constellation of agents tethered to the gateway (WebGL, with a 2D fallback and reduced-motion support), a live status bar, overview with recent activity, agents, contracts (verify / diff / export / compile), change requests (confirmation dialog and toasts), and an audit log with expandable hash links, **Credentials** (list and revoke task tokens, with cascade), **Signal Lab** (what-if scoring of an action with the real engines; nothing executes), **Drift** (measured CUSUM chart), and agent registration. It is responsive down to 390 px.
+* **Console** (React 18, TypeScript, Vite 8, Tailwind 4, three.js): a 3D constellation of agents watched by the gateway (WebGL, with a 2D fallback and reduced-motion support), a live status bar, overview with recent activity, agents, contracts (verify / diff / export / compile), change requests (confirmation dialog and toasts), and an audit log with expandable hash links, **Credentials** (list and revoke task tokens, with cascade), **Signal Lab** (what-if scoring of an action with the real engines; nothing executes), **Drift** (measured CUSUM chart), and agent registration. It is responsive down to 390 px.
 * **Dependencies**: `pip-audit` and `npm audit` both report 0 known vulnerabilities (last run).
 
 ## Run it for judging (one process, one URL)
@@ -24,7 +24,7 @@ powershell -ExecutionPolicy Bypass -File scripts\setup.ps1     # first time only
 powershell -File scripts\run_prod.ps1                          # builds the console, serves UI + API on http://127.0.0.1:8000
 backend\.venv\Scripts\python.exe scripts\seed_demo.py           # in a second window, once: the synthetic PRD fleet
 ```
-Open **http://127.0.0.1:8000** and sign in as `priya` with the password `tether-demo`. Add `-BindHost 0.0.0.0` to `run_prod.ps1` to expose it on your network.
+Open **http://127.0.0.1:8000** and sign in as `priya` with the password `sentrix-demo`. Add `-BindHost 0.0.0.0` to `run_prod.ps1` to expose it on your network.
 
 **A 5-minute tour for evaluators:** Overview (3D fleet constellation and the honest pillar status) → Signal Lab ("Out-of-role read 1 step after poisoned quote" → Analyse: role-fit deny rule, honey-resource, taint, cause = page 2 line 14) → Change Requests (as Meera submit, as Priya approve, and a new signed contract version appears) → Role Contracts (signatures and diff) → Credentials (revoke a token) → Drift (measured CUSUM) → Audit Log (verify the hash chain).
 
@@ -36,7 +36,7 @@ powershell -File scripts\run_backend.ps1                     # terminal 1: http:
 powershell -File scripts\run_frontend.ps1                    # terminal 2: http://localhost:5173
 backend\.venv\Scripts\python.exe scripts\seed_demo.py         # terminal 3: seed the synthetic fleet
 ```
-Sign in as `priya` (security), `meera` (owner), `arjun` (admin) or `auditor` (read-only). The password is `TETHER_DEMO_PASSWORD`, default `tether-demo` (see `.env.example`).
+Sign in as `priya` (security), `meera` (owner), `arjun` (admin) or `auditor` (read-only). The password is `SENTRIX_DEMO_PASSWORD`, default `sentrix-demo` (see `.env.example`).
 
 Linux/macOS: same steps, using `backend/.venv/bin/python`. Not tested.
 
@@ -60,10 +60,10 @@ Results from the final run are in [reports/test-results.md](reports/test-results
 | GNU make users | `make install`, `make test`, `make e2e`, … (see `Makefile`) |
 
 ## Docker
-The root `Dockerfile` builds a single container (API + console + MiniLM model) and is **verified**: built and smoke-tested locally (health, seeded fleet, UI deep links, real MiniLM analysis, audit chain). It listens on `$PORT` and seeds the demo fleet on first start (`TETHER_AUTO_SEED=1`).
+The root `Dockerfile` builds a single container (API + console + MiniLM model) and is **verified**: built and smoke-tested locally (health, seeded fleet, UI deep links, real MiniLM analysis, audit chain). It listens on `$PORT` and seeds the demo fleet on first start (`SENTRIX_AUTO_SEED=1`).
 ```powershell
-docker build -t tether .
-docker run -p 8000:8000 tether        # http://127.0.0.1:8000
+docker build -t sentrix .
+docker run -p 8000:8000 sentrix        # http://127.0.0.1:8000
 ```
 `railway.json` deploys the same image to Railway (`railway up`). The older two-service `docker-compose.yml` is still unverified.
 

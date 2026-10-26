@@ -1,13 +1,13 @@
 # Completion and deployment guide
 
-The steps that turn this repository into a complete, deployable TETHER for judging, in order. Each step says who does it and how to tell it is done.
+The steps that turn this repository into a complete, deployable SENTRIX for judging, in order. Each step says who does it and how to tell it is done.
 
 ---
 
 ## Part A: Finish the application
 
 ### Step 1. Write the Trust Ladder policy engine (critical)
-**Why:** graduated containment is the core of the problem statement. Today the gateway refuses every call (fail-closed), so TETHER detects and explains but does not contain.
+**Why:** graduated containment is the core of the problem statement. Today the gateway refuses every call (fail-closed), so SENTRIX detects and explains but does not contain.
 
 **Who:** a team member, by hand. It could not be generated for this build (see [BLOCKERS.md](BLOCKERS.md)).
 
@@ -51,7 +51,7 @@ Add an `Alert` row whenever the level rises or a deception hit occurs. Fill its 
 Record a `DelegationEdge` when a task is created with a parent token. Contagion: `risk_eff = max(risk, 0.5^hop × neighbour risk)`, and neighbours step up one level for a cool-down period. Expose `GET /v1/graph`.
 
 ### Step 5. The seven demo scenarios and the benchmark (PRD §12–13)
-These need Steps 1–4. Write them as scripted, deterministic runs against the gateway, using the inert fixtures in `gateway/tools.py`. Then run the benchmark comparing permission-only IAM, Isolation Forest, TETHER and its ablations, and **report the measured numbers, not the targets**.
+These need Steps 1–4. Write them as scripted, deterministic runs against the gateway, using the inert fixtures in `gateway/tools.py`. Then run the benchmark comparing permission-only IAM, Isolation Forest, SENTRIX and its ablations, and **report the measured numbers, not the targets**.
 
 ### Step 6 (optional). Behavior Engine
 Implement TRD §4.2 in `backend/app/engines/behavior.py` (currently a stub returning 0), then remove `"B"` from `disabled` in `fusion/risk.py`.
@@ -81,8 +81,8 @@ npm audit; ..\backend\.venv\Scripts\pip-audit.exe -r ..\backend\requirements.txt
 
 ### Step 10. Production settings
 Create a `.env` from `.env.example`. **Never commit it.**
-- `TETHER_DEMO_PASSWORD`: change it from `tether-demo` if the site is public.
-- `TETHER_CORS_ORIGINS`: set your real URL if the UI is served elsewhere.
+- `SENTRIX_DEMO_PASSWORD`: change it from `sentrix-demo` if the site is public.
+- `SENTRIX_CORS_ORIGINS`: set your real URL if the UI is served elsewhere.
 - Back up `data/keys/`. Those keys sign the contracts; if you lose them, existing signatures stop verifying.
 
 ### Step 11. First run on the deployment machine
@@ -106,7 +106,7 @@ Running the Playwright suite adds test agents to the demo data, so reset after a
 ## Part C: Submission
 
 ### Step 13. Presentation deck
-In `TETHER_Hackathon_Final.pptx`, replace `[ADD TEAM NAME HERE]`, `[ADD COLLEGE NAME HERE]`, `[ADD P.S. HERE]` and the member names and contact numbers. Add screenshots from `screenshots/`.
+In `SENTRIX_Hackathon_Final.pptx`, replace `[ADD TEAM NAME HERE]`, `[ADD COLLEGE NAME HERE]`, `[ADD P.S. HERE]` and the member names and contact numbers. Add screenshots from `screenshots/`.
 
 ### Step 14. Fallback recording
 Record a 3–5 minute screen video of the README's evaluator tour, in case the venue machine or network fails.
@@ -114,11 +114,11 @@ Record a 3–5 minute screen video of the README's evaluator tour, in case the v
 ### Step 15. Repository visibility
 The GitHub repo is **private**. When you are ready to share it with judges:
 ```powershell
-gh repo edit daanialmirza5/tether --visibility public --accept-visibility-change-consequences
+gh repo edit daanialmirza5/sentrix --visibility public --accept-visibility-change-consequences
 ```
 or keep it private and invite a judge by GitHub username (they receive an email invitation):
 ```powershell
-gh api -X PUT repos/daanialmirza5/tether/collaborators/JUDGE_USERNAME -f permission=pull
+gh api -X PUT repos/daanialmirza5/sentrix/collaborators/JUDGE_USERNAME -f permission=pull
 ```
 
 ### Step 16. Rehearse the hard question

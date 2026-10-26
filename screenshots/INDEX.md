@@ -20,4 +20,4 @@ All images were captured by Playwright (`frontend/e2e/console.spec.ts`) from the
 | `14-drift.png` | Measured CUSUM trace (held-out seed 10) for the frozen anchor vs the rolling baseline with threshold h, hover readout, and the results table. |
 
 Not captured, because the features do not exist: alerts, timeline, delegation graph, heartbeat, simulator, full benchmark page.
-| `15-live-deployment.png` | The public Railway deployment (https://tether-production-81af.up.railway.app), signed in, with the MiniLM engine active and the auto-seeded fleet. Browser console: zero errors. |
+| `15-live-deployment.png` | The public Railway deployment (https://sentrix-production.up.railway.app), signed in, with the MiniLM engine active and the auto-seeded fleet. Browser console: zero errors. |

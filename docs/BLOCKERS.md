@@ -2,7 +2,7 @@
 
 | # | Date | Operation | Outcome | Status |
 |---|------|-----------|---------|--------|
-| 1 | 2026-10-21 | Writing the simulated tool layer with realistic attack-text fixtures | Stopped by a safety classifier | Resolved: the owner chose inert `[[TETHER-TEST-INJECTION: ...]]` markers and a mock `.invalid` destination. `backend/app/gateway/tools.py` was rewritten that way. |
+| 1 | 2026-10-21 | Writing the simulated tool layer with realistic attack-text fixtures | Stopped by a safety classifier | Resolved: the owner chose inert `[[SENTRIX-TEST-INJECTION: ...]]` markers and a mock `.invalid` destination. `backend/app/gateway/tools.py` was rewritten that way. |
 | 2 | 2026-10-21 | Writing `backend/app/engines/behavior.py` (Behavior Engine) | Stopped by a safety classifier | Owner chose Option 3. `behavior.py` is now a disabled stub (s_b = 0, `BEHAVIOR_ENGINE_ENABLED` has no effect). Behavior Engine status: **NOT IMPLEMENTED**. |
 | 3 | 2026-10-21 | Writing `backend/app/policy/trust_ladder.py` (Trust Ladder policy engine, FR-7) | Stopped by a safety classifier | **Open.** The file was not created. This is on the critical path: the gateway, containment, contagion, scenarios and most tests depend on it. |
 
@@ -12,7 +12,7 @@
 Without the policy engine there are no verdicts or levels. The gateway pipeline, the delegation
 contagion, the scenario runner, the API response actions and the dashboard's trust views cannot be
 completed honestly. A stub was not used here: a no-op policy would either allow everything, which
-breaks "never execute a denied action", or deny everything, which is not TETHER.
+breaks "never execute a denied action", or deny everything, which is not SENTRIX.
 
 ## Decision after #3 (owner: "continue until you finish")
 The Trust Ladder was not rewritten in any form. Everything that does not depend on it was finished and

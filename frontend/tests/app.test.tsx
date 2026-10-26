@@ -33,11 +33,11 @@ function mockFetch(routes: Record<string, unknown>, status: Record<string, numbe
 
 afterEach(() => { vi.unstubAllGlobals(); setToken(null); });
 
-describe("TETHER console", () => {
+describe("SENTRIX console", () => {
   it("shows the login screen when there is no session", async () => {
     mockFetch({ "/v1/auth/me": { detail: "login required" } }, { "/v1/auth/me": 401 });
     render(<MemoryRouter><App /></MemoryRouter>);
-    expect(await screen.findByText("TETHER Console")).toBeInTheDocument();
+    expect(await screen.findByText("SENTRIX Console")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Sign in" })).toBeDisabled();
   });
 
@@ -62,7 +62,7 @@ describe("TETHER console", () => {
     expect(await screen.findByText("Contract v1 published for proc-agent-07")).toBeInTheDocument();
     expect(await screen.findByText(/enforcement fail-closed/)).toBeInTheDocument();
     expect(screen.getByRole("img", { name: /constellation/i })).toBeInTheDocument();
-    expect(document.title).toBe("Overview · TETHER");
+    expect(document.title).toBe("Overview · SENTRIX");
   });
 
   it("audit rows expand to show details and the hash link", async () => {

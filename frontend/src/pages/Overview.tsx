@@ -50,7 +50,7 @@ export default function Overview() {
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="Command centre" title="Overview" subtitle="Live state of the agent fleet from the TETHER API. All agents and data are synthetic." />
+      <PageHeader eyebrow="Command centre" title="Overview" subtitle="Live state of the agent fleet from the SENTRIX API. All agents and data are synthetic." />
       {/* Hero */}
       <section className="glass relative overflow-hidden rounded-3xl">
         <div className="grid-bg pointer-events-none absolute inset-0" />
@@ -59,10 +59,10 @@ export default function Overview() {
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-cyan-200 uppercase">
               Identity drift detection · AI agents</div>
             <h2 className="font-display text-3xl leading-[1.1] font-bold xl:text-[40px]">
-              IAM asks <span className="text-ink-300">“is this allowed?”</span><br /><span className="text-gradient">TETHER asks “is this still you?”</span>
+              IAM asks <span className="text-ink-300">“is this allowed?”</span><br /><span className="text-gradient">SENTRIX asks “is this still you?”</span>
             </h2>
             <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-300">
-              Every agent is tethered to a signed Role Contract. Its actions are scored against role, task and provenance,
+              Every agent is bound to a signed Role Contract and watched on every action. Its behaviour is scored against role, task and provenance,
               so a hijacked agent with a perfectly valid token stands out.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
@@ -75,7 +75,7 @@ export default function Overview() {
           <div className="relative pb-4">
             <Constellation3D nodes={nodes} height={380} onSelect={(id) => nav(`/contracts/${id}`)} />
             <div className="mx-auto w-fit rounded-full border border-white/[0.08] bg-ink-950/70 px-3 py-1 text-[11px] text-ink-300 backdrop-blur">
-              <span className="font-semibold text-cyan-300">{nodes.length}</span> agents tethered to the gateway · hover to inspect · click to open the contract</div>
+              <span className="font-semibold text-cyan-300">{nodes.length}</span> agents under watch at the gateway · hover to inspect · click to open the contract</div>
           </div>
         </div>
       </section>

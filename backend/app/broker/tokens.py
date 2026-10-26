@@ -66,7 +66,7 @@ def mint(db: Session, *, agent_id: str, task_id: str, session_id: str, scope: li
     jti = "tk-" + uuid.uuid4().hex[:12]
     claims = {"sub": agent_id, "task": task_id, "sid": session_id, "intent_hash": intent_hash(description),
               "scope": scope, "depth": depth, "max_depth": settings.max_delegation_depth, "ver": contract_version,
-              "iat": now, "exp": now + ttl, "jti": jti, "lane": lane, "iss": "tether-broker"}
+              "iat": now, "exp": now + ttl, "jti": jti, "lane": lane, "iss": "sentrix-broker"}
     if parent_agent_id:
         claims["parent"] = parent_agent_id
         claims["parent_jti"] = parent_jti
@@ -94,7 +94,7 @@ def verify(db: Session, token: str, *, current_contract_version: int | None = No
     if not isinstance(token, str) or token.count(".") != 2 or len(token) > 4096:
         raise TokenError("malformed", "token is malformed")
     try:
-        claims = jwt.decode(token, _public_key(), algorithms=["EdDSA"], issuer="tether-broker",
+        claims = jwt.decode(token, _public_key(), algorithms=["EdDSA"], issuer="sentrix-broker",
                             options={"require": ["exp", "iat", "jti", "sub", "task", "sid", "scope", "ver"]})
     except jwt.ExpiredSignatureError as exc:
         raise TokenError("expired", "token expired") from exc

@@ -1,4 +1,4 @@
-# TETHER Windows setup. Run from the repo root:  powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
+# SENTRIX Windows setup. Run from the repo root:  powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
 $ErrorActionPreference = "Stop"
 Set-Location (Split-Path $PSScriptRoot -Parent)
 

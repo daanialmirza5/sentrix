@@ -24,7 +24,7 @@ _lock = threading.Lock()
 _cache: dict[str, SigningKey] = {}
 
 # Identities that can sign. Users map onto these in security/auth.py.
-IDENTITIES = ("meera", "arjun", "priya", "tether-system", "token-broker")
+IDENTITIES = ("meera", "arjun", "priya", "sentrix-system", "token-broker")
 
 
 def canonical_json(obj: Any) -> bytes:

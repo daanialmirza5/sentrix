@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FileSignature, KeyRound, ScanSearch } from "lucide-react";
 import { post, type User } from "../services/api";
-import { TetherMark, useAuth } from "../App";
+import { SentrixMark, useAuth } from "../App";
 import { Button, ErrorBox, Spinner, useTitle } from "../components/ui";
 import Constellation3D from "../components/LazyConstellation";
 
@@ -46,12 +46,12 @@ export default function Login() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/75 to-ink-950/10" />
       <div className="relative mx-auto grid min-h-screen max-w-6xl items-center gap-10 px-6 py-10 lg:grid-cols-[1.2fr_1fr]">
         <div className="animate-rise">
-          <div className="flex items-center gap-3"><TetherMark className="h-11 w-11" />
-            <span className="font-display text-2xl font-bold tracking-[0.2em] text-ink-100">TETHER</span></div>
+          <div className="flex items-center gap-3"><SentrixMark className="h-11 w-11" />
+            <span className="font-display text-2xl font-bold tracking-[0.2em] text-ink-100">SENTRIX</span></div>
           <h1 className="mt-8 font-display text-4xl leading-tight font-bold text-ink-100 md:text-5xl">
             Valid token ≠<br /><span className="text-gradient">valid behavior.</span></h1>
           <p className="mt-4 max-w-lg text-ink-300">Role-anchored identity drift detection for autonomous AI agents.
-            IAM asks “is this allowed?”. TETHER asks “is this still you?”</p>
+            IAM asks “is this allowed?”. SENTRIX asks “is this still you?”</p>
           <ul className="mt-8 hidden space-y-4 md:block">
             {POINTS.map(({ icon: Icon, t, d }) => (
               <li key={t} className="flex gap-3">
@@ -62,7 +62,7 @@ export default function Login() {
         </div>
         <form onSubmit={submit} className="glass w-full animate-rise space-y-4 rounded-2xl p-7 [animation-delay:120ms]">
           <div>
-            <h2 className="font-display text-xl font-semibold text-ink-100">TETHER Console</h2>
+            <h2 className="font-display text-xl font-semibold text-ink-100">SENTRIX Console</h2>
             <p className="mt-1 text-sm text-ink-500">Sign in as one of the demo personas from the PRD.</p>
           </div>
           <label className="block text-xs font-medium text-ink-300">Persona
@@ -75,7 +75,7 @@ export default function Login() {
           </label>
           {error && <ErrorBox message={error} />}
           <Button type="submit" disabled={busy || !password} className="w-full py-2.5">{busy && <Spinner />}Sign in</Button>
-          <p className="text-center text-[11px] text-ink-500">Demo authentication · password set by TETHER_DEMO_PASSWORD (see README)</p>
+          <p className="text-center text-[11px] text-ink-500">Demo authentication · password set by SENTRIX_DEMO_PASSWORD (see README)</p>
         </form>
       </div>
     </div>

@@ -14,7 +14,7 @@ function webglAvailable() {
 }
 
 /**
- * Agents orbit the TETHER gateway core, each bound by a tether (its signed Role Contract).
+ * Agents orbit the SENTRIX gateway core, each bound by a link (its signed Role Contract).
  * Pure three.js; renders only while visible; disposes everything on unmount.
  */
 export default function Constellation3D({ nodes, onSelect, height = 420, decorative = false }:
@@ -77,7 +77,7 @@ export default function Constellation3D({ nodes, onSelect, height = 420, decorat
     const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0x8aa0c8, size: 0.12, transparent: true, opacity: 0.7 }));
     scene.add(stars);
 
-    // --- agents on tilted orbits with tethers and travelling pulses
+    // --- agents on tilted orbits with contract links and travelling pulses
     const list = nodes.length ? nodes : [];
     type A = { node: Node3D; mesh: THREE.Mesh; glow: THREE.Sprite; line: THREE.Line; pulse: THREE.Mesh; radius: number; speed: number; phase: number; tilt: number; ring: THREE.Mesh };
     const agents: A[] = list.map((node, i) => {
@@ -185,7 +185,7 @@ export default function Constellation3D({ nodes, onSelect, height = 420, decorat
     return (
       <div className="relative flex items-center justify-center" style={{ height }} role="img" aria-label="Agent constellation (2D fallback)">
         <div className="absolute h-24 w-24 rounded-full bg-cyan-400/30 blur-2xl" />
-        <div className="relative grid h-16 w-16 place-items-center rounded-full bg-cyan-400 text-xs font-bold text-ink-950">TETHER</div>
+        <div className="relative grid h-16 w-16 place-items-center rounded-full bg-cyan-400 text-xs font-bold text-ink-950">SENTRIX</div>
         {nodes.map((n, i) => {
           const a = (i / Math.max(1, nodes.length)) * Math.PI * 2;
           return <span key={n.id} className="absolute rounded-full border border-white/10 bg-ink-900 px-2 py-0.5 text-[11px] text-ink-300"
@@ -196,7 +196,7 @@ export default function Constellation3D({ nodes, onSelect, height = 420, decorat
   }
 
   return (
-    <div className="relative" style={{ height }} role="img" aria-label={`3D constellation of ${nodes.length} agents tethered to the TETHER gateway`}>
+    <div className="relative" style={{ height }} role="img" aria-label={`3D constellation of ${nodes.length} agents watched by the SENTRIX gateway`}>
       <div ref={mount} className="absolute inset-0" />
       {hover && !decorative && (
         <div className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-[130%] animate-fade-in rounded-xl border border-white/10 bg-ink-950/90 px-3 py-2 text-xs shadow-xl backdrop-blur"

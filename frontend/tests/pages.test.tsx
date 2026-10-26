@@ -12,7 +12,7 @@ const ANALYSIS = {
   note: "Analysis only.", action: { verb: "read", resource: "/hr/salary_backup.xlsx", tool: "fs.read", action_type: "data_read", destination: null, bytes_out: 0, sensitivity: 0.95, text: "read fs read hr salary backup xlsx" },
   role_fit: { s_r: 1, rules: [{ rule: "deny_domain", score: 1, detail: "matches deny-list 'hr/*'" }], hard_deny: ["deny_domain"], fit: 0.23, nearest_anchor: "retrieve supplier price quotes", semantic_score: 0.79, mode: "minilm-onnx" },
   deception: { honey: "hr/salary_backup.xlsx", canaries: [], dlp: [] },
-  provenance: { s_p: 0.82, tau: 0.82, source: "supplier_quote.pdf", steps_since: 1, attribution: { source: "supplier_quote.pdf", confidence: 0.9, uncertain: false, span: { page: 2, line: 14, text: "[[TETHER-TEST-INJECTION: ...]]", patterns: [] } } },
+  provenance: { s_p: 0.82, tau: 0.82, source: "supplier_quote.pdf", steps_since: 1, attribution: { source: "supplier_quote.pdf", confidence: 0.9, uncertain: false, span: { page: 2, line: 14, text: "[[SENTRIX-TEST-INJECTION: ...]]", patterns: [] } } },
   explanation: { why: "read /hr/salary_backup.xlsx.", factors: "Deception override", cause: "supplier_quote.pdf, page 2, line 14" },
 };
 const pts = Array.from({ length: 60 }, (_, i) => ({ window: i + 1, phase: i < 40 ? "benign" : "drift", S: i < 40 ? 0 : (i - 39) * 2, S_rolling: i < 40 ? 0 : (i - 39) * 0.8 }));

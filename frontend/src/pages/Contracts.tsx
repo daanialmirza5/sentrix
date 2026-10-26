@@ -64,7 +64,7 @@ export default function Contracts() {
     setDiff(await api<Diff>(`/v1/contracts/${selected}/diff?a=${list[list.length - 2].version}&b=${list[list.length - 1].version}`));
   }
   async function download() {
-    const res = await fetch(`/v1/contracts/${selected}/export?fmt=yaml`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("tether.token")}` } });
+    const res = await fetch(`/v1/contracts/${selected}/export?fmt=yaml`, { headers: { Authorization: `Bearer ${sessionStorage.getItem("sentrix.token")}` } });
     const url = URL.createObjectURL(new Blob([await res.text()], { type: "text/yaml" }));
     Object.assign(document.createElement("a"), { href: url, download: `${selected}.contract.yaml` }).click();
   }

@@ -35,15 +35,15 @@ const NAV_GROUPS = [
 ];
 const NAV = NAV_GROUPS.flatMap((g) => g.items);
 
-/** Brand mark: a core with an orbiting, tethered node. */
-export function TetherMark({ className = "h-8 w-8" }: { className?: string }) {
+/** Brand mark: a sentry's eye inside a hexagonal shield (sentry + matrix). */
+export function SentrixMark({ className = "h-8 w-8" }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-hidden>
-      <defs><linearGradient id="tm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#67e8f9" /><stop offset="1" stopColor="#a78bfa" /></linearGradient></defs>
-      <circle cx="16" cy="16" r="13" fill="none" stroke="url(#tm)" strokeOpacity=".45" strokeWidth="1.2" />
-      <line x1="16" y1="16" x2="25.2" y2="6.8" stroke="url(#tm)" strokeWidth="1.6" strokeLinecap="round" />
-      <circle cx="16" cy="16" r="5" fill="url(#tm)" />
-      <circle cx="25.2" cy="6.8" r="2.6" fill="#e8eef8" />
+      <defs><linearGradient id="sm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#67e8f9" /><stop offset="1" stopColor="#a78bfa" /></linearGradient></defs>
+      <path d="M16 2.5 27.7 9.25v13.5L16 29.5 4.3 22.75V9.25Z" fill="url(#sm)" fillOpacity=".12" stroke="url(#sm)" strokeWidth="1.6" strokeLinejoin="round" />
+      <path d="M8.2 16c2.2-3.6 4.8-5.4 7.8-5.4s5.6 1.8 7.8 5.4c-2.2 3.6-4.8 5.4-7.8 5.4S10.4 19.6 8.2 16Z" fill="none" stroke="url(#sm)" strokeWidth="1.5" strokeLinejoin="round" />
+      <circle cx="16" cy="16" r="2.6" fill="url(#sm)" />
+      <circle cx="16.9" cy="15.1" r=".8" fill="#e8eef8" />
     </svg>
   );
 }
@@ -66,9 +66,9 @@ export default function App() {
         <div className="flex min-h-screen font-sans text-ink-100">
           <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-white/[0.06] bg-ink-950/60 backdrop-blur-xl md:flex">
             <div className="flex items-center gap-3 px-5 pt-6 pb-5">
-              <TetherMark className="h-9 w-9" />
+              <SentrixMark className="h-9 w-9" />
               <div>
-                <div className="font-display text-lg font-bold tracking-[0.18em]">TETHER</div>
+                <div className="font-display text-lg font-bold tracking-[0.18em]">SENTRIX</div>
                 <div className="text-[11px] text-ink-500">Valid token ≠ valid behavior</div>
               </div>
             </div>
@@ -143,7 +143,7 @@ function StatusBar({ user, onSignOut }: { user: User; onSignOut: () => void }) {
   return (
     <header className="sticky top-0 z-30 flex items-center justify-between gap-3 border-b border-white/[0.06] bg-ink-950/70 px-4 py-2.5 backdrop-blur-xl md:px-8">
       <div className="flex min-w-0 items-center gap-3 text-xs text-ink-500">
-        <TetherMark className="h-6 w-6 md:hidden" />
+        <SentrixMark className="h-6 w-6 md:hidden" />
         <Badge tone={state.tone}><span className={`h-1.5 w-1.5 rounded-full ${state.tone === "bad" ? "bg-rose-400" : state.tone === "muted" ? "bg-ink-500" : "animate-pulse-ring bg-cyan-300"}`} />
           <span className="truncate">{state.text}</span></Badge>
         {data && <span className="hidden items-center gap-1.5 font-mono lg:flex"><span className={`h-1.5 w-1.5 rounded-full ${data.embeddings.mode === "minilm-onnx" ? "bg-emerald-400" : "bg-ink-500"}`} />MiniLM: {data.embeddings.mode === "uninitialised" ? "loads on first use" : data.embeddings.mode}</span>}

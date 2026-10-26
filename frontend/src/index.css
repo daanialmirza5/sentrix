@@ -3,7 +3,7 @@
 @import "@fontsource-variable/space-grotesk";
 @import "@fontsource/jetbrains-mono/400.css";
 
-/* TETHER design tokens. Dark-only by design (SOC wall display). */
+/* SENTRIX design tokens. Dark-only by design (SOC wall display). */
 @theme {
   --color-ink-950: #05070d;
   --color-ink-900: #0a0f1c;

@@ -19,7 +19,7 @@ async def lifespan(_app: FastAPI):
     from .engines.deception import seed_honey
     with db_session() as db:
         seed_honey(db)
-    if os.environ.get("TETHER_AUTO_SEED", "").lower() in {"1", "true", "yes"}:
+    if os.environ.get("SENTRIX_AUTO_SEED", "").lower() in {"1", "true", "yes"}:
         from .demo_seed import seed_if_empty
         with db_session() as db:
             seed_if_empty(db)
@@ -27,7 +27,7 @@ async def lifespan(_app: FastAPI):
 
 
 def create_app() -> FastAPI:
-    app = FastAPI(title="TETHER", version="0.1.0", lifespan=lifespan,
+    app = FastAPI(title="SENTRIX", version="0.1.0", lifespan=lifespan,
                   description="Role-anchored identity drift detection for AI agents. Valid token != valid behavior.")
     app.add_middleware(CORSMiddleware, allow_origins=settings.cors_origins, allow_credentials=True,
                        allow_methods=["GET", "POST"], allow_headers=["Authorization", "Content-Type", "X-Agent-Secret"])
