@@ -10,3 +10,7 @@ data/models/
 data/audit_anchor.json
 frontend/test-results/
 frontend/playwright-report/
+
+# Pitch decks contain team contact details; keep them out of the public repo
+*.pptx
+*_Hackathon_Final.pdf
