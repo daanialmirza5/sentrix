@@ -72,7 +72,7 @@ docker run -p 8000:8000 sentrix        # http://127.0.0.1:8000
 * No detection-rate, FPR, latency or continuity numbers exist for the full system. The PRD targets (≥90 % TPR, <2 % FPR, <50 ms p95) are **unmeasured**.
 
 ## Known limitations
-See[docs/security.md](docs/security.md) and [docs/decisions.md](docs/decisions.md). In short: no runtime enforcement, no behavior signal, no delegation graph or contagion, no alerts or incident reports, no WebSocket stream, no Redis, no scenarios, and the synthetic data only.
+See [docs/security.md](docs/security.md) and [docs/decisions.md](docs/decisions.md). In short: no runtime enforcement, no behavior signal, no delegation graph or contagion, no alerts or incident reports, no WebSocket stream, no Redis, no scenarios, and the synthetic data only.
 
 ## Repository
 ```
