@@ -4,7 +4,7 @@ dist/
 __pycache__/
 *.pyc
 .env
-data/sentrix.db*
+data/*.db*
 data/keys/
 data/models/
 data/audit_anchor.json
